@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mymaps.models.Place
 import com.example.mymaps.models.UserMap
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
 private const val TAG = "MapsAdapter"
@@ -15,12 +16,14 @@ private const val TAG = "MapsAdapter"
 class MainActivity : AppCompatActivity() {
 
     private lateinit var rvMaps: RecyclerView
+    private lateinit var fabCreateMap: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        rvMaps = findViewById(R.id.fabCreateMap)
+        rvMaps = findViewById(R.id.rvMaps)
+        fabCreateMap = findViewById(R.id.fabCreateMap)
 
         val userMaps = generateSampleData()
         // Set layout manager on the recycler view
@@ -34,8 +37,11 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra(EXTRA_USER_MAP, userMaps[position])
                 startActivity(intent)
             }
-
         })
+
+        fabCreateMap.setOnClickListener {
+            Log.i(TAG, "Tap on FAB")
+        }
     }
 
     private fun generateSampleData(): List<UserMap> {
