@@ -11,11 +11,13 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.mymaps.databinding.ActivityCreateMapBinding
+import com.google.android.gms.maps.model.Marker
 
 private const val TAG = "CreateMapActivity"
 
 class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    private var markers: MutableList<Marker> = mutableListOf()
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityCreateMapBinding
 
@@ -45,9 +47,16 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        mMap.setOnInfoWindowClickListener { markerToDelete ->
+            Log.i(TAG, "onWindowClickListener - delete this marker")
+            markers.remove(markerToDelete)
+            markerToDelete.remove()
+        }
+
         mMap.setOnMapLongClickListener { latLng ->
             Log.i(TAG, "setOnMapLongClickListener")
-            mMap.addMarker(MarkerOptions().position(latLng).title("My new marker").snippet("a cool snippet"))
+            val marker = mMap.addMarker(MarkerOptions().position(latLng).title("My new marker").snippet("a cool snippet"))
+            markers.add(marker)
 
         }
 
