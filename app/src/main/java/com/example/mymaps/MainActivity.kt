@@ -27,11 +27,11 @@ class MainActivity : AppCompatActivity() {
         rvMaps.adapter = MapsAdapter(this, userMaps, object: MapsAdapter.OnClickListener {
             override fun onItemClick(position: Int) {
                 Log.i(TAG, "onItemClick $position")
+                // When user clicks on view in RV, navigate to new activity
+
             }
 
         })
-
-        // When user clicks on view in RV, navigate to new activity
     }
 
     private fun generateSampleData(): List<UserMap> {
