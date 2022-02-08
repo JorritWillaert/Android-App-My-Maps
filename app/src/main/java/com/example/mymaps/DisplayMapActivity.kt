@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.mymaps.databinding.ActivityDisplayMapBinding
 import com.example.mymaps.models.UserMap
+import com.google.android.gms.maps.model.LatLngBounds
 
 private const val TAG = "DisplayMapActivity"
 
@@ -29,6 +30,8 @@ class DisplayMapActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
 
         userMap = intent.getSerializableExtra(EXTRA_USER_MAP) as UserMap
+
+        supportActionBar?.title = userMap.title
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -50,9 +53,12 @@ class DisplayMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         Log.i(TAG, "user map to render: ${userMap.title}")
 
+        val boundsBuilder = LatLngBounds.Builder()
         for (place in userMap.places) {
             val latLng = LatLng(place.latitude, place.longitude)
             mMap.addMarker(MarkerOptions().position(latLng).title(place.title).snippet(place.description))
+            boundsBuilder.include(latLng)
         }
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(), 1000, 1000, 0))
     }
 }
