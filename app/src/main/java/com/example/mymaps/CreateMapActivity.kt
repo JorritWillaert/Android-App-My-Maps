@@ -22,6 +22,8 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityCreateMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = intent.getStringExtra(EXTRA_MAP_TITLE)
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment

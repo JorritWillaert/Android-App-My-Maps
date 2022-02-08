@@ -1,5 +1,6 @@
 package com.example.mymaps
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,8 @@ import com.example.mymaps.models.UserMap
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
+const val EXTRA_MAP_TITLE = "EXTRA_MAP_TITLE"
+private const val REQUEST_CODE = 1234
 private const val TAG = "MapsAdapter"
 
 class MainActivity : AppCompatActivity() {
@@ -42,8 +45,17 @@ class MainActivity : AppCompatActivity() {
         fabCreateMap.setOnClickListener {
             Log.i(TAG, "Tap on FAB")
             val intent = Intent(this, CreateMapActivity::class.java)
-            startActivity(intent)
+            intent.putExtra(EXTRA_MAP_TITLE, "new map")
+            startActivityForResult(intent, REQUEST_CODE)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // Get new map data from the data
+
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun generateSampleData(): List<UserMap> {
