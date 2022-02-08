@@ -25,7 +25,7 @@ const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
 const val EXTRA_MAP_TITLE = "EXTRA_MAP_TITLE"
 private const val REQUEST_CODE = 1234
 private const val FILE_NAME = "UserMaps.data"
-private const val TAG = "MapsAdapter"
+private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         rvMaps = findViewById(R.id.rvMaps)
         fabCreateMap = findViewById(R.id.fabCreateMap)
 
-        userMaps = generateSampleData()
+        userMaps = deserializeUserMaps(this).toMutableList()
         // Set layout manager on the recycler view
         rvMaps.layoutManager = LinearLayoutManager(this)
         // Set adapter on the recycler view
@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
             Log.i(TAG, "onActivityResult with new map title ${userMap.title}")
             userMaps.add(userMap)
             adapter.notifyItemInserted(userMaps.size - 1)
+            serializeUserMaps(this, userMaps)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
