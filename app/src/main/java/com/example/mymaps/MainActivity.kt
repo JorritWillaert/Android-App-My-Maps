@@ -1,5 +1,6 @@
 package com.example.mymaps
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -28,7 +29,8 @@ class MainActivity : AppCompatActivity() {
             override fun onItemClick(position: Int) {
                 Log.i(TAG, "onItemClick $position")
                 // When user clicks on view in RV, navigate to new activity
-
+                val intent = Intent(this@MainActivity, DisplayMapActivity::class.java)
+                startActivity(intent)
             }
 
         })
