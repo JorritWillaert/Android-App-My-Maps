@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        rvMaps = findViewById(R.id.rvMaps)
+        rvMaps = findViewById(R.id.fabCreateMap)
 
         val userMaps = generateSampleData()
         // Set layout manager on the recycler view
