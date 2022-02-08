@@ -18,7 +18,7 @@ private const val TAG = "MapsAdapter"
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var userMaps: List<UserMap>
+    private lateinit var userMaps: MutableList<UserMap>
     private lateinit var adapter: MapsAdapter
 
     private lateinit var rvMaps: RecyclerView
@@ -59,11 +59,13 @@ class MainActivity : AppCompatActivity() {
             // Get new map data from the data
             val userMap = data?.getSerializableExtra(EXTRA_USER_MAP) as UserMap
             Log.i(TAG, "onActivityResult with new map title ${userMap.title}")
+            userMaps.add(userMap)
+            adapter.notifyItemInserted(userMaps.size - 1)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun generateSampleData(): List<UserMap> {
+    private fun generateSampleData(): MutableList<UserMap> {
         return listOf(
             UserMap(
                 "Memories from University",
@@ -105,6 +107,6 @@ class MainActivity : AppCompatActivity() {
                     Place("Kati Thai", "Authentic Portland Thai food, served with love", 45.505, -122.635)
                 )
             )
-        )
+        ).toMutableList()
     }
 }
