@@ -102,10 +102,8 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
             showAlertDialog(latLng)
         }
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val belgium = LatLng(50.5, 4.5)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(belgium, 5f))
     }
 
     private fun showAlertDialog(latLng: LatLng) {
