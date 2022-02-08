@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -67,8 +68,10 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun showAlertDialog(latLng: LatLng) {
+        val placeFormView = LayoutInflater.from(this).inflate(R.layout.dialog_create_place, null)
         val dialog = AlertDialog.Builder(this)
-            .setTitle("Create a marker").setMessage("hello")
+            .setTitle("Create a marker")
+            .setView(placeFormView)
             .setNegativeButton("Cancel", null)
             .setPositiveButton("OK", null)
             .show()
