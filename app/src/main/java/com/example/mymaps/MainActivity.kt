@@ -17,10 +17,11 @@ class MainActivity : AppCompatActivity() {
 
         rvMaps = findViewById(R.id.rvMaps)
 
+        val userMaps = generateSampleData()
         // Set layout manager on the recycler view
         rvMaps.layoutManager = LinearLayoutManager(this)
         // Set adapter on the recycler view
-        rvMaps.adapter = MapsAdapter(this, emptyList<UserMap>())
+        rvMaps.adapter = MapsAdapter(this, userMaps)
     }
 
     private fun generateSampleData(): List<UserMap> {
