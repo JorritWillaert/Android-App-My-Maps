@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mymaps.models.UserMap
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +16,9 @@ class MainActivity : AppCompatActivity() {
 
         rvMaps = findViewById(R.id.rvMaps)
 
-        
+        // Set layout manager on the recycler view
+        rvMaps.layoutManager = LinearLayoutManager(this)
+        // Set adapter on the recycler view
+        rvMaps.adapter = MapsAdapter(this, emptyList<UserMap>())
     }
 }
