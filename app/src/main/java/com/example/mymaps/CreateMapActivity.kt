@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -17,6 +18,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.mymaps.databinding.ActivityCreateMapBinding
 import com.google.android.gms.maps.model.Marker
+import com.google.android.material.snackbar.Snackbar
 
 private const val TAG = "CreateMapActivity"
 
@@ -38,6 +40,13 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        mapFragment.view?.let {
+            Snackbar.make(it, "Long press to add a marker!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("OK", {})
+                .setActionTextColor(ContextCompat.getColor(this, android.R.color.white))
+                .show()
+        }
     }
 
     /**
