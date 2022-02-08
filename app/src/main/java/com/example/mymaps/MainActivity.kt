@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity() {
 
         fabCreateMap.setOnClickListener {
             Log.i(TAG, "Tap on FAB")
+            val intent = Intent(this, CreateMapActivity::class.java)
+            startActivity(intent)
         }
     }
 
